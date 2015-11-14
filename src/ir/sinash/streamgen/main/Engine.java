@@ -90,7 +90,7 @@ public class Engine implements Runnable {
         int i = 0;
 
 
-        while(true){
+        while(!Thread.currentThread().isInterrupted()){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
