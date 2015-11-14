@@ -21,10 +21,10 @@ public class Engine implements Runnable {
         System.out.println("Enter generation interval (int, seconds): ");
         engine.setIntervalSeconds(scanner.nextInt());
 
-        System.out.println("Enter lower bound (int): ");
+        System.out.println("Enter lower bound (int, inclusive): ");
         engine.setLowerBound(scanner.nextInt());
 
-        System.out.println("Enter upper bound (int): ");
+        System.out.println("Enter upper bound (int, inclusive): ");
         engine.setUpperBound(scanner.nextInt());
 
         System.out.printf("Terminating (0) or Continuous (1)? ");
