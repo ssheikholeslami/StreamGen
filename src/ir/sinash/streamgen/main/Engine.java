@@ -8,7 +8,7 @@ public class Engine implements Runnable {
 
 
     private int intervalSeconds = 1, lowerBound = 0, upperBound = 100, streamSize = 0;
-    private boolean isSizeLimited = false;
+    private boolean isContinuous = true;
 
 
 
@@ -31,7 +31,7 @@ public class Engine implements Runnable {
         int response = scanner.nextInt();
         if(response == 0) {
             System.out.println("Enter stream size (int): ");
-            engine.setSizeLimited(true);
+            engine.setContinuous(false);
             engine.setStreamSize(scanner.nextInt());
         }
 
@@ -75,30 +75,33 @@ public class Engine implements Runnable {
         this.streamSize = streamSize;
     }
 
-    public boolean isSizeLimited() {
-        return isSizeLimited;
+    public boolean isContinuous() {
+        return isContinuous;
     }
 
-    public void setSizeLimited(boolean isSizeLimited) {
-        this.isSizeLimited = isSizeLimited;
+    public void setContinuous(boolean isSizeLimited) {
+        this.isContinuous = isSizeLimited;
     }
 
     @Override
     public void run() {
 
+        if (isContinuous()) {
+            int dataCounter = 0, output;
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    Thread.sleep(getIntervalSeconds()*1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                dataCounter++;
 
-        int i = 0;
+                output = getLowerBound()+(int)(Math.random()*((getUpperBound()-getLowerBound()) + 1));
+                System.out.println(output);
 
 
-        while(!Thread.currentThread().isInterrupted()){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-            i++;
-            System.out.println(i);
-        }
 
+        }
     }
 }
